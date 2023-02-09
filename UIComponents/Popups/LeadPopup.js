@@ -33,22 +33,20 @@ class DataForm extends Component {
     handleSubmit = async () => {
         Keyboard.dismiss();
         const { fullName, phone, email } = this.state;
-        setTimeout(() => {
-            if (!this.state.isValidationComplete) {
-                alert("Please fill the form correctly")
-                return
-            }
-            // this.setState({ isLoading: true });
-            let userData = {
-                fullName,
-                phone,
-                email,
+        if (!this.state.isValidationComplete) {
+            alert("Please fill the form correctly")
+            return
+        }
+        // this.setState({ isLoading: true });
+        let userData = {
+            fullName,
+            phone,
+            email,
 
-            }
-            console.log("data", userData)
-            this.props.closeModal()
+        }
+        console.log("data", userData)
+        this.props.closeModal()
 
-        }, 200)
     }
     onValidationChange = (type, isValidated) => {
         const { validationErrors } = this.state
@@ -102,27 +100,28 @@ class DataForm extends Component {
                                 onChangeText={(text) => { this.handleUserInput('email', text) }}
 
                             />
-                            <View style={styles.bottomButtonContainer}>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.props.closeModal()
-                                    }}
-                                >
-                                    <View style={[styles.cancelButton, { backgroundColor: Colors.getColor('buttonColorLight') }]}>
-                                        <Text style={{ fontSize: WScale(18), color: '#fff', fontWeight: 'bold' }}>Cancel</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.handleSubmit()
 
-                                    }}
-                                >
-                                    <View style={[styles.saveButton, { backgroundColor: Colors.getColor('buttonColor') }]}>
-                                        <Text style={{ fontSize: WScale(18), color: '#fff', fontWeight: 'bold' }}>Save</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
+                        </View>
+                        <View style={styles.bottomButtonContainer}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.props.closeModal()
+                                }}
+                            >
+                                <View style={[styles.cancelButton, { backgroundColor: Colors.getColor('buttonColorLight') }]}>
+                                    <Text style={{ fontSize: WScale(18), color: '#fff', fontWeight: 'bold' }}>Cancel</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.handleSubmit()
+
+                                }}
+                            >
+                                <View style={[styles.saveButton, { backgroundColor: Colors.getColor('buttonColor') }]}>
+                                    <Text style={{ fontSize: WScale(18), color: '#fff', fontWeight: 'bold' }}>Save</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -152,8 +151,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: "60%",
-        paddingVertical: WScale(20)
+        height: "55%",
+        // paddingVertical: WScale(20)
     },
     popupBody: {
         width: '95%',
@@ -161,7 +160,8 @@ const styles = StyleSheet.create({
         // height: WScale(70),
         // height: '35%',
         borderRadius: WScale(10),
-        backgroundColor: Colors.getColor('primary'),
+        backgroundColor: "green",
+        // backgroundColor: Colors.getColor('primary'),
         shadowOffset: { width: 3.5, height: 3.5 },
         shadowOpacity: 0.5,
     },
@@ -180,14 +180,14 @@ const styles = StyleSheet.create({
     },
     bodyContainer: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
     body: {
-        flex: 0.93,
-        // justifyContent: 'space-between',
+        flex: 0.60,
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-    },
 
+    },
     saveButton: {
         width: WScale(110),
         height: WScale(40),
@@ -219,8 +219,7 @@ const styles = StyleSheet.create({
     },
     bottomButtonContainer: {
         position: 'absolute',
-        bottom: WScale(10),
-        marginTop: WScale(10),
+        bottom: WScale(30),
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '80%',
